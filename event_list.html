@@ -1,0 +1,27 @@
+<!-- templates/portfolio/event_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List</title>
+</head>
+<body>
+    <h1>Events</h1>
+    <a href="{% url 'event_create' %}">Create New Event</a>  <!-- Link to create new event -->
+    <ul>
+        {% for event in events %}
+            <li>
+                {{ event.name }} - {{ event.date }} 
+                <a href="{% url 'event_update' event.id %}">Edit</a>  <!-- Add edit link for event -->
+                <form action="{% url 'event_confirm_delete' event.id %}" method="POST" style="display:inline;">  <!-- Add delete form -->
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No events found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

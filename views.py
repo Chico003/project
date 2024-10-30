@@ -1,3 +1,5 @@
-from django.shortcuts import render
+# itsofolio/views.py
+from django.shortcuts import render # type: ignore
 
-# Create your views here.
+def homepage(request):
+    return render(request, 'homepage.html')  # Ensure this file exists in the templates directory

@@ -1,0 +1,27 @@
+<!-- templates/portfolio/member_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member List</title>
+</head>
+<body>
+    <h1>Members</h1>
+    <a href="{% url 'member_create' %}">Create New Member</a>  <!-- Link to create new member -->
+    <ul>
+        {% for member in members %}
+            <li>
+                {{ member.name }} - {{ member.role }} 
+                <a href="{% url 'member_update' member.id %}">Edit</a>  <!-- Add edit link for member -->
+                <form action="{% url 'member_delete' member.id %}" method="POST" style="display:inline;">  <!-- Add delete form -->
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No members found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

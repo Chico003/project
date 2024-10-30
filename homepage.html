@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITSOfolio - Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to ITSOfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'project_list' %}">Projects</a></li>
+                <li><a href="{% url 'member_list' %}">Members</a></li>
+                <li><a href="{% url 'event_list' %}">Events</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Your Gateway to IT Student Activities</h2>
+            <p>
+                Welcome to the ITSOfolio, the official portfolio for the Information Technology Students Organization (ITSO).
+            </p>
+
+            <h3>Our Projects</h3>
+            <ul>
+                {% for project in projects %}
+            <li>
+                {{ project.title }} - {{ project.description }}
+            </li>
+        {% empty %}
+            <li>No projects found.</li>
+        {% endfor %}
+            </ul>
+
+            <h3>Our Members</h3>
+            <ul>
+                {% for member in members %}
+                    <li>{{ member.name }}</li>
+                {% empty %}
+                    <li>No members available.</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Upcoming Events</h3>
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.title }}: {{ event.date }}</li>
+                {% empty %}
+                    <li>No upcoming events.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 ITSOfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
